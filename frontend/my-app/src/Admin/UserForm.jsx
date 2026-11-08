@@ -18,7 +18,8 @@ export default function UserForm() {
   let user = uid ? users.find((u) => u._id === uid) : {};
 
   //user.roles is an array of objects, this converts to array of role._ids
-  let roleids = user.roles.map((element) => element._id);
+
+  const roleids = user.roles?.map((element) => element._id) || [];
 
   const {
     register,
@@ -122,7 +123,41 @@ export default function UserForm() {
           </div>
         </div>
 
-        {/* //222 add apropriate fields here */}
+        <div className="field">
+          <label htmlFor="lastName">Last Name</label>
+          <div className="control">
+            <input
+              type="text"
+              name="lastName"
+              {...register("lastName", { required: "Last name is required" })}
+            />
+            {errors.lastName && <Vhelp message={errors.lastName.message} />}
+          </div>
+        </div>
+
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <div className="control">
+            <input
+              type="email"
+              name="email"
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && <Vhelp message={errors.email.message} />}
+          </div>
+        </div>
+
+        <div className="field">
+          <label htmlFor="username">Username</label>
+          <div className="control">
+            <input
+              type="text"
+              name="username"
+              {...register("username", { required: "Username is required" })}
+            />
+            {errors.username && <Vhelp message={errors.username.message} />}
+          </div>
+        </div>
 
         <div className="field">
           <label htmlFor="password">Password</label>

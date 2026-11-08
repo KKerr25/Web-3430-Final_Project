@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../Auth/AuthContext.jsx";
-
 import { Link, useNavigate } from "react-router-dom";
+import "../stylesheets/Users.css";
 
 export default function Users() {
   let { authenticated, users, setUsers, roles, setRoles } =
@@ -84,10 +84,10 @@ export default function Users() {
   };
 
   return (
-    <div className="react-stuff users-component">
+    <div className="react-stuff users-component table-responsive">
       <h1>Users</h1>
       <div className="table-header">
-        <Link to="/admin/users/new">
+        <Link to="/admin/users/new" state={{ is_new: true }}>
           <button className="btn btn-primary">Create User</button>{" "}
         </Link>
       </div>
@@ -104,7 +104,42 @@ export default function Users() {
             <td>Delete</td>
           </tr>
         </thead>
-        <tbody>{/* //222 Add appropriate jsx code here */}</tbody>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user._id}>
+              <td>{user._id}</td>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>
+                {user.roles.map((role) => (
+                  <span key={role._id} className="badge bg-secondary">
+                    {role.name}
+                  </span>
+                ))}
+              </td>
+              <td>
+                <Link
+                  to={`/admin/users/${user._id}/edit`}
+                  state={{ is_new: false }}
+                >
+                  <button className="btn btn-sm btn-outline-primary">
+                    Edit
+                  </button>
+                </Link>
+              </td>
+              <td>
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={() => deleteMe(user._id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

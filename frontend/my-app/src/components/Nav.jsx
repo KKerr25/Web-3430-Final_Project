@@ -88,7 +88,9 @@ export default function Nav() {
                 <NavLink to="/signin">Sign In</NavLink>
               </li>
               <li>
-                <NavLink to="/signup">Register</NavLink>
+                <NavLink to="/signup" state={{ is_new: true }}>
+                  Register
+                </NavLink>
               </li>
             </ul>
           </>

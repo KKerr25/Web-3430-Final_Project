@@ -85,12 +85,8 @@ export default function App() {
               <Route path="dashboard" element={<DashCards />}></Route>
               <Route path="/admin" element={<Admin />}>
                 <Route path="users" element={<Users />}></Route>
-                {/* //222 Add two routes here for the UserForm component
-                                //  the path for the
-                                // two routes are "users/new and "users/:uid/edit
-                                // this will enable you to create a new user or edit an
-                                // existing user
-                                //  */}
+                <Route path="users/new" element={<UserForm />} />
+                <Route path="users/:uid/edit" element={<UserForm />} />
 
                 {/* //333 Add role related routing here */}
               </Route>
